@@ -1,28 +1,28 @@
-h1. EasySwfUpload
+EasySwfUpload
 
 This plugin will help you to embed swf upload into your project
 
-*First, install this plugin:*
+First, install this plugin:
 script/plugin install git://github.com/over/easy_swf_upload.git
 
-*Then, run generator:*
+Then, run generator:
 script/generate easy_swf_upload
 
-h2. Example
+Example
 
-*In your application.html.erb include javascripts:*
+In your application.html.erb include javascripts:
 
 <%= javascript_include_tag :defaults, "swfupload", "swfupload_plugin" %>
 
 Plugin doesn't works without prototype javascript library.
 
-*Then, use this helper to embed swf upload to your application:*
+Then, use this helper to embed swf upload to your application:
 <%= swf_upload_area "Upload images", :url => upload_image_block_path,
  					:session_id => "_plugins_session", # you can see this in config/evironment.rb
  					:filetypes => "*.jpg; *.gif",
  					:button_style => "font-family: Arial, sans-serif; font-size: 14pt; font-weight:bold;" %>
 
-*In your controller: *
+In your controller: 
 class PagesController < ApplicationController
   session :cookie_only => false # this is very important, don't forget to set it to false
   
@@ -31,13 +31,13 @@ class PagesController < ApplicationController
 	
 	# use RJS here
     render :update do |page|
-      page['blocks'].insert("<div>blablabla</div>")
+      page['blocks'].insert("<div><img src="http://domain.com" /></div>")
     end
   end
 end
 
 
-*Also, you need to customize uploading area, i used this css:*
+Also, you need to customize uploading area, i used this css:
 <style>
 body {
 	font-family:Arial, Helvetica, Sans-serif; font-size:12px;
@@ -66,11 +66,10 @@ body {
 }
 </style>
 
-*Uploading file template:*
+Uploading file template:
 
-Use this to customize css.
-|<li id="file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>|
-|
+
+<li id="file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>
 
 
 Thanks.
