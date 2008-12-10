@@ -31,7 +31,7 @@ class PagesController < ApplicationController
 	
 	# use RJS here
     render :update do |page|
-      page['blocks'].insert("<div><img src="http://domain.com" /></div>")
+      page['blocks'].insert("<div>blablabla</div>")
     end
   end
 end
@@ -69,7 +69,8 @@ body {
 *Uploading file template:*
 
 Use this to customize css.
-<li id="file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>
+|<li id="file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>|
+|
 
 
 Thanks.
