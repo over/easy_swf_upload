@@ -18,7 +18,6 @@ Plugin doesn't works without prototype javascript library.
 
 Then, use this helper to embed swf upload to your application:
 <%= swf_upload_area "Upload images", :url => upload_image_block_path,
- 					:session_id => "_plugins_session", # you can see this in config/evironment.rb
  					:filetypes => "*.jpg; *.gif",
  					:button_style => "font-family: Arial, sans-serif; font-size: 14pt; font-weight:bold;" %>
 
@@ -27,7 +26,7 @@ class PagesController < ApplicationController
   session :cookie_only => false # this is very important, don't forget to set it to false
   
   def get_image_block
-	@image_block = ImageBlock.new(:file => params[:Filedata]) # here you can use your favourite plugin to work with attachments
+	@image_block = ImageBlock.new(:file => swf_upload_data) # here you can use your favourite plugin to work with attachments
 	
 	# use RJS here
     render :update do |page|
