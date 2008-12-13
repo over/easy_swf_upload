@@ -1,4 +1,4 @@
-var Cookie = {
+var SwfuCookie = {
 	set: function(name, value, daysToExpire) {
 		var expire = '';
 		if (daysToExpire != undefined) {
@@ -27,12 +27,12 @@ var Cookie = {
 }
 
 var flashUploader = {
-	init: function() {
-		this.swfUploadBlock = $$('.swfUploadArea')[0]
+	init: function(block, index) {
+		this.swfUploadBlock = block
 		this.postParams = new Hash()
 		
 		this.postParams.set('authenticity_token', this.swfUploadBlock.down('.token').innerHTML)
-		this.postParams.set(this.swfUploadBlock.down('.session_id').innerHTML, Cookie.get(this.swfUploadBlock.down('.session_id').innerHTML))
+		this.postParams.set(this.swfUploadBlock.down('.session_id').innerHTML, SwfuCookie.get(this.swfUploadBlock.down('.session_id').innerHTML))
 		
 		this.settings = {
 			upload_url: this.swfUploadBlock.down('.url').innerHTML,
@@ -61,7 +61,9 @@ var flashUploader = {
 			button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
 			button_cursor: SWFUpload.CURSOR.HAND,
 			custom_settings : {
-					container : this.swfUploadBlock.down('.uploadContainer')
+					container : this.swfUploadBlock.down('.uploadContainer'),
+					current_file_index: 0,
+					filePrefix: index
 			},
 			flash_url : "/flash/swfupload.swf",
 			debug: false
@@ -75,34 +77,44 @@ var flashUploader = {
 	},
 
 	fileDialogComplete: function(filesSelected, filesQueued) {
-		for (i = 0; i < filesSelected; i++) {
-			var template = new Template('<li id="file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>')
-			var show = {title: this.getFile(i)["name"], id:i}
+		for (i = 0; i < filesQueued; i++) {
+			var template = new Template('<li id="#{prefix}_file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>')
+			var show = {
+				title: this.getFile(i)["name"], 
+				id: (this.customSettings.current_file_index + this.getFile(i)["index"]),
+				prefix: this.customSettings.filePrefix
+			}
+			
 			this.customSettings.container.insert(template.evaluate(show))
 		}
+		this.customSettings.current_file_index += i
 		this.startUpload()
 	},
 	
 	uploadProgress: function(file, bytesLoaded, bytesTotal) {
-		$('file_'+file["index"]).down('div').setStyle({width: (bytesLoaded * 100 / bytesTotal + '%')})
+		$(this.customSettings.filePrefix + '_file_' + file["index"]).down('div').setStyle({width: (bytesLoaded * 100 / bytesTotal + '%')})
 	},
 	
 	uploadError: function(file, errorCode, message) {
 		alert(message)
 	},
 	uploadSuccess: function(file, serverData) {
-		$('file_'+file["index"]).down('div').setStyle({width: '100%'})
+		$(this.customSettings.filePrefix + '_file_'+file["index"]).down('div').setStyle({width: '100%'})
+		
+		$(this.customSettings.filePrefix + '_file_'+file["index"]).fade({ duration: 0.5, afterFinish: function() {
+			$(this.customSettings.filePrefix + '_file_'+file["index"]).remove()
+		}.bind(this) });
 		eval(serverData)
 	},
 	uploadComplete: function(file) {
 		if (this.getStats().files_queued > 0) {
 			this.startUpload()
-		} else {
-			//this.customSettings.container.hide()
 		}
 	}
 }
 
 Event.observe(window, 'load', function() {
-	flashUploader.init()
+	$$('.swfUploadArea').each(function(element, index) {
+		flashUploader.init(element, index)
+	})
 })
