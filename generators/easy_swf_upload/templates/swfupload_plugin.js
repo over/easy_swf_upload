@@ -30,10 +30,10 @@ var flashUploader = {
 	init: function(block, index) {
 		this.swfUploadBlock = block
 		this.postParams = new Hash()
-		
+
 		this.postParams.set('authenticity_token', this.swfUploadBlock.down('.token').innerHTML)
-		this.postParams.set(this.swfUploadBlock.down('.session_id').innerHTML, SwfuCookie.get(this.swfUploadBlock.down('.session_id').innerHTML))
-		
+		this.postParams.set(this.swfUploadBlock.down('.session_key').innerHTML, this.swfUploadBlock.down('.session_id').innerHTML)
+
 		this.settings = {
 			upload_url: this.swfUploadBlock.down('.url').innerHTML,
 			post_params: this.postParams.toObject(),
