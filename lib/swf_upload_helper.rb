@@ -8,6 +8,7 @@ module SwfUploadHelper
         <div class='session_id' style='display:none'>#{session.session_id}</div>
         <div class='filetypes' style='display:none'>#{options[:filetypes]}</div>
         <div class='buttonStyle' style='display:none'>#{options[:button_style]}</div>
+        <div class='singleFile' style='display:none'>#{options[:single_file] ? 'true' : 'false'}</div>
         <div class='embedArea'>
             <div id='swfUploadButton'></div>
         </div>

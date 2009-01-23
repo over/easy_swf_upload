@@ -36,7 +36,8 @@ module SwfUpload
     "mov" => "video/quicktime",
     "avi" => "video/x-msvideo",
     "asf" => "video/x-ms-asf",
-    "wmv" => "video/x-ms-wmv"
+    "wmv" => "video/x-ms-wmv",
+    "flv" => "video/x-flv"
   }
 
   def swf_upload_data

@@ -60,6 +60,7 @@ var flashUploader = {
 			button_text_left_padding: 0,
 			button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
 			button_cursor: SWFUpload.CURSOR.HAND,
+			button_action: (this.swfUploadBlock.down('.singleFile').innerHTML == 'true') ? SWFUpload.BUTTON_ACTION.SELECT_FILE : SWFUpload.BUTTON_ACTION.SELECT_FILES,
 			custom_settings : {
 					container : this.swfUploadBlock.down('.uploadContainer'),
 					current_file_index: 0,

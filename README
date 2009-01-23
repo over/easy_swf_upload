@@ -21,6 +21,8 @@ Then, use this helper to embed swf upload to your application:
  					:filetypes => "*.jpg; *.gif",
  					:button_style => "font-family: Arial, sans-serif; font-size: 14pt; font-weight:bold;" %>
 
+You want to allow uploading only single file at once, you can pass :single_file => true option to swf_upload_area helper.
+
 In your controller: 
 class PagesController < ApplicationController
   session :cookie_only => false # this is very important, don't forget to set it to false
