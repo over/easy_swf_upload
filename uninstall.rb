@@ -1,1 +1,1 @@
-# Uninstall hook code here
+print `script/destroy easy_swf_upload`
