@@ -75,7 +75,7 @@ var FlashUploader = Class.create({
 	},
 
 	fileDialogComplete: function(filesSelected, filesQueued) {
-		var template = new Template('<li id="#{id}"><div class="progress" style="width:1px"></div><h6>#{title}</h6></li>')
+		var template = new Template('<li id="#{id}"><div class="bar"><div class="progress" style="width:1px"></div></div><h6>#{title}</h6></li>')
 
 		filesQueued.times(function(i) {
 			var file = this.swfu.getFile(i)

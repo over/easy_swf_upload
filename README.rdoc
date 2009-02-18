@@ -4,9 +4,7 @@ This plugin will help you to embed swf upload into your project
 
 First, install this plugin:
   script/plugin install git://github.com/over/easy_swf_upload.git
-
-Then, run generator:
-  script/generate easy_swf_upload
+  #script/generate easy_swf_upload is called for you automatically
 
 == Example
 
@@ -41,35 +39,73 @@ In your controller:
 Also, you need to customize uploading area, i used this css:
   <style>
   body {
-    font-family:Arial, Helvetica, Sans-serif; font-size:12px;
+    font-family: Arial, Helvetica, Sans-serif; font-size:12px;
   }
 
   .uploadContainer {
-    margin:0; padding:0;
+    margin: 0; padding: 0;
   }
+
   .uploadContainer li {
     list-style:none;
     margin:0; padding:0;
-    padding:4px; border:#CCC; margin-bottom:10px;
-    position:relative; height:22px;
-      }
+    padding: 0.4em; border: #ccc; margin-bottom: 1em;
+    position: relative; height: 2em;
+  }
 
   .uploadContainer li h6 {
-    margin:0; padding:0; color:#000;
-    font-size:11px; position:relative; z-index:2;
+    margin: 0; padding: 0; color: #000;
+    font-size: 1.1em; position: relative; z-index: 2;
+  }
+
+  .uploadContainer li div.bar {
+    width: 50%;
+    margin: 0; padding: 0;
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 0.5em; z-index: 1;
+    background: #def;
   }
 
   .uploadContainer li div.progress {
-    margin:0; padding:0;
-      position:absolute;
-      left:0; bottom:0;
-      height:5px; z-index:1; background:#003ee3;
+    background: #003ee3;
   }
   </style>
 
+Or if you use ncss:
+
+  body {
+    font-family: Arial, Helvetica, Sans-serif; font-size:12px;
+  }
+
+  .uploadContainer {
+    margin: 0; padding: 0;
+    li {
+      list-style:none;
+      margin:0; padding:0;
+      padding: 0.4em; border: #ccc; margin-bottom: 1em;
+      position: relative; height: 2em;
+      h6 {
+        margin: 0; padding: 0; color: #000;
+        font-size: 1.1em; position: relative; z-index: 2;
+      }
+      div.bar {
+        width: 50%;
+        margin: 0; padding: 0;
+        position: absolute;
+        left: 0; bottom: 0;
+        height: 0.5em; z-index: 1;
+        background: #def;
+      }
+      div.progress {
+        background: #003ee3;
+      }
+    }
+  }
+
 Uploading file template:
 
-  <li id="file_#{id}"><div class="progress" style="width:1%"></div><h6>#{title}</h6></li>
+  <li id="file_#{id}"><div class="bar"><div class="progress" style="width:1%"></div></div><h6>#{title}</h6></li>
 
 
 Thanks.
