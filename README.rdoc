@@ -47,27 +47,22 @@ Also, you need to customize uploading area, i used this css:
   }
 
   .uploadContainer li {
-    list-style:none;
-    margin:0; padding:0;
+    list-style: none;
+    margin: 0; padding: 0; height: 2em;
     padding: 0.4em; border: #ccc; margin-bottom: 1em;
-    position: relative; height: 2em;
   }
 
   .uploadContainer li h6 {
     margin: 0; padding: 0; color: #000;
-    font-size: 1.1em; position: relative; z-index: 2;
+    font-size: 1.1em;
   }
 
   .uploadContainer li div.bar {
-    width: 50%;
-    margin: 0; padding: 0;
-    position: absolute;
-    left: 0; bottom: 0;
-    height: 0.5em; z-index: 1;
-    background: #def;
+    width: 50%; margin: 0; padding: 0;
+    height: 0.5em; background: #def;
   }
 
-  .uploadContainer li div.progress {
+  .uploadContainer li div.bar div.progress {
     background: #003ee3;
   }
   </style>
@@ -81,31 +76,26 @@ Or if you use ncss:
   .uploadContainer {
     margin: 0; padding: 0;
     li {
-      list-style:none;
-      margin:0; padding:0;
+      list-style: none;
+      margin: 0; padding: 0; height: 2em;
       padding: 0.4em; border: #ccc; margin-bottom: 1em;
-      position: relative; height: 2em;
       h6 {
         margin: 0; padding: 0; color: #000;
-        font-size: 1.1em; position: relative; z-index: 2;
+        font-size: 1.1em;
       }
       div.bar {
-        width: 50%;
-        margin: 0; padding: 0;
-        position: absolute;
-        left: 0; bottom: 0;
-        height: 0.5em; z-index: 1;
-        background: #def;
-      }
-      div.progress {
-        background: #003ee3;
+        width: 50%; margin: 0; padding: 0;
+        height: 0.5em; background: #def;
+        div.progress {
+          background: #003ee3;
+        }
       }
     }
   }
 
 Uploading file template:
 
-  <li id="file_#{id}"><div class="bar"><div class="progress" style="width:1%"></div></div><h6>#{title}</h6></li>
+  <li id="#{id}"><h6>#{title}</h6><div class="bar"><div class="progress" style="width:0"></div></div></li>
 
 
 Thanks.
