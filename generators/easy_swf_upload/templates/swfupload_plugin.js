@@ -28,7 +28,7 @@ var SwfuCookie = {
 
 var FlashUploader = Class.create({
 	initialize: function(block, index) {
-		this.id = 'fu_' + index
+		this.index = index
 		this.swfUploadBlock = block
 		this.container = block.down('.uploadContainer')
 		this.postParams = new Hash()
@@ -47,8 +47,6 @@ var FlashUploader = Class.create({
 			file_upload_limit: 0,
 
 			file_dialog_complete_handler: this.fileDialogComplete.bind(this),
-			file_dialog_start_handler: null,
-			upload_start_handler: null,
 			upload_progress_handler: this.uploadProgress.bind(this),
 			upload_error_handler: this.uploadError.bind(this),
 			upload_success_handler: this.uploadSuccess.bind(this),
@@ -78,10 +76,9 @@ var FlashUploader = Class.create({
 		var template = new Template('<li id="#{id}"><h6>#{title}</h6><div class="bar"><div class="progress" style="width:0"></div></div></li>')
 
 		filesQueued.times(function(i) {
-			var file = this.swfu.getFile(i)
-			this.container.insert(template.evaluate({id: this.fileDomId(file, this.currentFileIndex), title: file.name.escapeHTML()}))
+			var file = this.swfu.getFile(this.currentFileIndex++)
+			this.container.insert(template.evaluate({id: this.fileDomId(file), title: file.name.escapeHTML()}))
 		}.bind(this))
-		this.currentFileIndex += filesQueued
 
 		this.swfu.startUpload()
 	},
@@ -111,8 +108,8 @@ var FlashUploader = Class.create({
 		}
 	},
 
-	fileDomId: function(file, reference){
-		return this.id + '_file_' + (file.index + (reference == undefined ? 0 : reference))
+	fileDomId: function(file){
+		return 'fu_' + this.index + '_file_' + file.index
 	}
 })
 FlashUploader.init = function() {
