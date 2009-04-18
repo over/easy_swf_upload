@@ -47,7 +47,7 @@ module SwfUpload
 private
 
   def fix_mime_type(data)
-    if !data.is_a?(File) && mime_type = MIME_TYPES[File.extname(data.original_filename).delete('.')]
+    if !data.is_a?(File) && mime_type = MIME_TYPES[File.extname(data.original_filename).delete('.').downcase]
       data.content_type = mime_type
     end
     data
