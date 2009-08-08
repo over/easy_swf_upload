@@ -23,6 +23,7 @@ You want to allow uploading only single file at once, you can pass :single_file 
 
 In your controller:
   class PagesController < ApplicationController
+	# If your rails version < 2.3.0, go this way
     session :cookie_only => false, :only => :upload_image_block # this is very important, don't forget to set it to false
 
     def upload_image_block
