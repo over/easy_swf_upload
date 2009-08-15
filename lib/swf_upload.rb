@@ -37,7 +37,9 @@ module SwfUpload
     "avi" => "video/x-msvideo",
     "asf" => "video/x-ms-asf",
     "wmv" => "video/x-ms-wmv",
-    "flv" => "video/x-flv"
+    "flv" => "video/x-flv",
+    "cr2" => "image/x-canon-cr2",
+    "nef" => "image/x-nikon-nef"
   }
 
   def swf_upload_data
