@@ -1,6 +1,6 @@
 module SwfUploadHelper
   def swf_upload_area(title, options)
-    session_key = RAILS_GEM_VERSION < "2.3.0" ? ActionController::Base.session[0][:session_key] : ActionController::Base.session_options[:session_key]
+    session_key = RAILS_GEM_VERSION < "2.3.0" ? ActionController::Base.session[0][:session_key] : ActionController::Base.session_options[:key]
     
     %Q{<div class="swfUploadArea">
         <div class="buttonText" style="display:none">#{title}</div>
