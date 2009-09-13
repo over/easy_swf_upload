@@ -28,9 +28,9 @@ else
   require 'rack/utils'
 
   class FlashSessionCookieMiddleware
-    def initialize(app, session_key = '_session_id')
+    def initialize(app)
       @app = app
-      @session_key = session_key
+      @session_key = ActionController::Base.session_options[:key]
     end
 
     def call(env)
@@ -43,5 +43,5 @@ else
     end
   end
 
-  ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, FlashSessionCookieMiddleware, ActionController::Base.session_options[:key])
+  ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, FlashSessionCookieMiddleware)
 end
