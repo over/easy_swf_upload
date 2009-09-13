@@ -35,13 +35,14 @@ var FlashUploader = Class.create({
 
 		this.postParams.set('authenticity_token', this.swfUploadBlock.down('.token').innerHTML)
 		this.postParams.set(this.swfUploadBlock.down('.session_key').innerHTML, this.swfUploadBlock.down('.session_id').innerHTML)
-
+		this.fileSizeLimit = this.container.down(".fileSizeLimit")
+		
 		this.settings = {
 			upload_url: this.swfUploadBlock.down('.url').innerHTML,
 			post_params: this.postParams.toObject(),
 			use_query_string: true,
 
-			file_size_limit: "40 MB",
+			file_size_limit: this.swfUploadBlock.down('.file_size_limit').innerHTML,
 			file_types: this.swfUploadBlock.down('.filetypes').innerHTML,
 			file_types_description: "",
 			file_upload_limit: 0,
@@ -51,7 +52,7 @@ var FlashUploader = Class.create({
 			upload_error_handler: this.uploadError.bind(this),
 			upload_success_handler: this.uploadSuccess.bind(this),
 			upload_complete_handler: this.uploadComplete.bind(this),
-			button_placeholder_id: this.swfUploadBlock.down('.embedArea').down('div').readAttribute('id'),
+			button_placeholder_id: this.swfUploadBlock.down('.embedArea').down('div.placeHolder').readAttribute('id'),
 			button_width: 180,
 			button_height: 18,
 			button_text: '<span class="button">' + this.swfUploadBlock.down('.buttonText').innerHTML + '</span>',
@@ -112,10 +113,24 @@ var FlashUploader = Class.create({
 		return 'fu_' + this.index + '_file_' + file.index
 	}
 })
+
 FlashUploader.init = function() {
 	$$('.swfUploadArea').each(function(element, index) {
 		if (!element.flashUploader) {
 			element.flashUploader = new FlashUploader(element, index)
+			
+			buttonWrap = element.down(".embedButton")
+			object = element.down('object')
+			
+			buttonWrap.relativize()
+			object.absolutize()
+			
+			object.setStyle({
+				left: 0,
+				top: 0,
+				width: buttonWrap.down('input').getWidth() + 'px',
+				height: buttonWrap.down('input').getHeight() + 'px'
+			})
 		}
 	})
 }
