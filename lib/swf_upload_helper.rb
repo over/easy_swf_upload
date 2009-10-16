@@ -7,7 +7,7 @@ module SwfUploadHelper
           <div class="url">#{options[:url]}</div>
           <div class="token">#{CGI::escape(form_authenticity_token)}</div>
           <div class="session_key">#{session_key}</div>
-          <div class="session_id">#{cookies[session_key]}</div>
+          <div class="session_id">#{CGI::escape(cookies[session_key])}</div>
           <div class="filetypes">#{options[:filetypes]}</div>
           <div class="buttonStyle">#{options[:button_style]}</div>
           <div class="file_size_limit">#{options[:file_size_limit] || "40 MB"}</div>
