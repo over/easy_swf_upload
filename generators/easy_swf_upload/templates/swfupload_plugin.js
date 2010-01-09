@@ -45,6 +45,7 @@ var FlashUploader = Class.create({
 			file_size_limit: this.swfUploadBlock.down('.file_size_limit').innerHTML,
 			file_types: this.swfUploadBlock.down('.filetypes').innerHTML,
 			file_types_description: "",
+			file_queue_error_handler: this.uploadError.bind(this),
 			file_upload_limit: 0,
 
 			file_dialog_complete_handler: this.fileDialogComplete.bind(this),
@@ -90,6 +91,7 @@ var FlashUploader = Class.create({
 
 	uploadError: function(file, errorCode, message) {
 		alert(message)
+		this.currentFileIndex ++
 	},
 	uploadSuccess: function(file, serverData) {
 		this.uploadProgress(file, 1, 1)
