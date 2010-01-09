@@ -1,8 +1,8 @@
 = EasySwfUpload
 
 This plugin will help you to embed swf upload into your project
+Installation:
 
-First, install this plugin:
   script/plugin install git://github.com/over/easy_swf_upload.git
   #script/generate easy_swf_upload is called for you automatically
 
@@ -12,7 +12,7 @@ In your application.html.erb include javascripts:
 
   <%= javascript_include_tag :defaults, :swf_upload %>
 
-Plugin doesn't works without prototype javascript library.
+<b>Important:</b> Plugin doesn't works without prototype javascript library
 
 Then, use this helper to embed swf upload to your application:
   <%= swf_upload_area "Upload images", :url => upload_image_block_path,
@@ -40,59 +40,25 @@ In your controller:
 
 
 Also, you need to customize uploading area, i used this css:
-  <style>
-  body {
-    font-family: Arial, Helvetica, Sans-serif; font-size:12px;
-  }
-
-  .uploadContainer {
-    margin: 0; padding: 0;
-  }
-
-  .uploadContainer li {
-    list-style: none;
-    margin: 0; padding: 0; height: 2em;
-    padding: 0.4em; border: #ccc; margin-bottom: 1em;
-  }
-
-  .uploadContainer li h6 {
-    margin: 0; padding: 0; color: #000;
-    font-size: 1.1em;
-  }
-
-  .uploadContainer li div.bar {
-    width: 50%; margin: 0; padding: 0;
-    height: 0.5em; background: #def;
-  }
-
-  .uploadContainer li div.bar div.progress {
-    background: #003ee3;
-  }
+  <style type="text/css">
+    ul.uploadContainer { padding: 10px; }
+    ul.uploadContainer li { font-size: 14px; position: relative; height: 22px; }
+    ul.uploadContainer li h6 { font-size: 14px; }
+    ul.uploadContainer li div.bar { width: 100%; height: 4px; }
+    ul.uploadContainer li div.progress { position: absolute; top: 17px; height: 4px; background: #63b534; }
   </style>
 
-Or if you use ncss:
+Or if you use LESS[http://github.com/cloudhead/less/] or css_dryer[http://github.com/airblade/css_dryer]:
 
-  body {
-    font-family: Arial, Helvetica, Sans-serif; font-size:12px;
-  }
+  ul.uploadContainer {
+    padding: 10px;
 
-  .uploadContainer {
-    margin: 0; padding: 0;
     li {
-      list-style: none;
-      margin: 0; padding: 0; height: 2em;
-      padding: 0.4em; border: #ccc; margin-bottom: 1em;
-      h6 {
-        margin: 0; padding: 0; color: #000;
-        font-size: 1.1em;
-      }
-      div.bar {
-        width: 50%; margin: 0; padding: 0;
-        height: 0.5em; background: #def;
-        div.progress {
-          background: #003ee3;
-        }
-      }
+      font-size: 14px; position: relative; height: 22px;
+
+      h6 { font-size: 14px; }
+      div.bar { width: 100%; height: 4px; }
+      div.progress { position: absolute; top: 17px; height: 4px; background: #63b534; }
     }
   }
 
@@ -100,7 +66,10 @@ Uploading file template:
 
   <li id="#{id}"><h6>#{title}</h6><div class="bar"><div class="progress" style="width:0"></div></div></li>
 
-
 Thanks.
 
-Copyright (c) 2008 Mikhail Tabunov, released under the MIT license
+== Contributors
+
+Jason&nbsp;Murad[http://github.com/jrmurad], Joris&nbsp;Trooster[http://github.com/trooster], Ivan&nbsp;Kuchin[http://github.com/toy], Igor&nbsp;Gladkoborodov[http://github.com/varezhka]
+
+Copyright (c) 2008—2010 Mikhail Tabunov, released under the MIT license
